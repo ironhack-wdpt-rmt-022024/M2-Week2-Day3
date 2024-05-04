@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { HomePage } from "./components/HomePage";
+import { AboutPage } from "./components/AboutPage";
+import { NotFoundPage } from "./components/NotFoundPage";
+import { Route, Routes } from "react-router-dom";
+import { Post } from "./components/Post";
+import { Ragnar } from "./components/Ragnar";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import { DogDetail } from "./components/DogDetail";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      {/* this is where we defind our routes, between the Routes with an 's' tag */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/posts" element={<Post />} />
+        <Route path="/ragnars" element={<Ragnar />} />
+        {/* this is a dynamic route */}
+        <Route path="/dogs/:dogName" element={<DogDetail />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
